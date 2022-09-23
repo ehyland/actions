@@ -1,0 +1,10 @@
+name: 'install-docker-compose-v2'
+
+description: 'Installs docker-compose v2'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install docker-compose v2 (GH actions used v1 by default)
+      shell: bash
+      run: ${{ github.action_path }}/scripts/install.sh

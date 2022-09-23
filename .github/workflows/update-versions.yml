@@ -1,0 +1,13 @@
+on:
+  schedule:
+    # - cron: '30 12 * * *'
+    - cron: '* * * * *'
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - run: install-docker-compose-v2/scripts/update-version-file.sh
+      - run: |
+          git commit -am "Automated version update"
+          git push
