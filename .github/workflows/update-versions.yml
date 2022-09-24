@@ -1,7 +1,6 @@
 on:
   schedule:
-    # - cron: '30 12 * * *'
-    - cron: '*/5 * * * *'
+    - cron: '30 12 * * *'
 
 jobs:
   main:
@@ -15,5 +14,14 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
-          git commit -m "Update versions"
-          git push
+
+          changes=$(git status --porcelain)
+
+          if [[ -z "$changes" ]]; then
+            echo "Nothing to commit"
+          else
+            echo "Committing change"
+            echo "$changes"
+            git commit -m "Update versions"
+            git push
+          fi
